@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>dnchrdev — Unity Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+/* Layout: one narrow column like a build sheet — hero, released games, study projects, experience, stack, contacts */
+:root{
+  --bg:#ECEEF1; --surface:#F7F8FA; --fg:#14171C; --muted:#5A6370; --line:#D3D8DF;
+  --accent:#2448D8; --accent-soft:#DCE3FB; --amber:#B86A00; --amber-soft:#F6E7CF;
+  --ph:#8A93A0;
+  --display:"Tektur","Onest",system-ui,sans-serif;
+  --body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1216; --surface:#161A20; --fg:#E6E9ED; --muted:#98A1AD; --line:#262C35;
+  --accent:#7D97FF; --accent-soft:#1C2647; --amber:#F0B45A; --amber-soft:#3A2A12; --ph:#6E7784; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1216; --surface:#161A20; --fg:#E6E9ED; --muted:#98A1AD; --line:#262C35;
+  --accent:#7D97FF; --accent-soft:#1C2647; --amber:#F0B45A; --amber-soft:#3A2A12; --ph:#6E7784; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:48px 64px;display:flex;flex-direction:column;gap:64px}
+
+.ph{color:var(--ph);border-bottom:1px dashed var(--ph)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:20px}
+.hero .url{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,8vw,72px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.hero .role{font-family:var(--display);font-weight:500;font-size:clamp(18px,3vw,24px);margin:0;color:var(--accent)}
+.hero p.lead{margin:0;max-width:62ch;font-size:18px;color:var(--fg)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted)}
+.chip-open{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;padding:6px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);align-self:flex-start}
+.chip-open::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.contacts-inline{display:flex;flex-wrap:wrap;gap:10px}
+.btn{font-family:var(--mono);font-size:13px;padding:9px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)}
+.btn.primary{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+
+/* section heads */
+section{display:flex;flex-direction:column;gap:24px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.sh h2{font-family:var(--display);font-weight:700;font-size:26px;margin:0}
+.sh .hint{font-size:13px;color:var(--muted)}
+
+/* game cards */
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.media{aspect-ratio:16/9;max-width:100%;display:grid;place-items:center;
+  background:repeating-linear-gradient(135deg,transparent 0 10px,color-mix(in srgb,var(--line) 70%,transparent) 10px 11px),var(--bg);
+  border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--ph)}
+.body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.card h3{font-family:var(--display);font-weight:500;font-size:20px;margin:0}
+.badge{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:4px 8px;border-radius:4px;background:var(--amber-soft);color:var(--amber);white-space:nowrap}
+.badge.study{background:var(--accent-soft);color:var(--accent)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.spec{font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+.stats b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+.links{display:flex;flex-wrap:wrap;gap:14px;font-size:14px}
+
+/* projects list */
+.projects{display:flex;flex-direction:column;gap:20px}
+.project{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.project .media{border-bottom:0;border-right:1px solid var(--line);height:100%}
+.project ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:flex;flex-direction:column;gap:4px}
+
+/* experience */
+.timeline{display:flex;flex-direction:column}
+.job{display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:0}
+.when{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.job h3{margin:0 0 4px;font-size:17px;font-weight:600}
+.job .engine{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.job p{margin:6px 0 0;color:var(--muted);font-size:15px;max-width:65ch}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.group{display:flex;flex-direction:column;gap:10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:12.5px;padding:5px 9px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+
+/* contacts */
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
+.contact .v{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;text-align:right}
+
+footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:720px){
+  .games,.stack,.contact-grid{grid-template-columns:minmax(0,1fr)}
+  .project{grid-template-columns:minmax(0,1fr)}
+  .project .media{border-right:0;border-bottom:1px solid var(--line);height:auto}
+  .job{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media (prefers-reduced-motion:no-preference){.btn,.card{transition:border-color .15s}}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <header class="hero">
+    <span class="url">dnchrdev.github.io</span>
+    <span class="chip-open">Открыт к предложениям</span>
+    <h1><span class="ph">Имя Фамилия</span></h1>
+    <p class="role">Unity-разработчик · геймплей и архитектура</p>
+    <p class="lead">4 года в геймдеве: 2 года на Unreal Engine, 2 года на Unity. Пишу геймплей на C# с упором на архитектуру: Clean Architecture, DI, ECS, unit-тесты. <span class="ph">Одна фраза о том, какую работу ищешь.</span></p>
+    <div class="meta">
+      <span><span class="ph">Город</span></span>
+      <span><span class="ph">Удалёнка / офис / релокация</span></span>
+    </div>
+    <div class="contacts-inline">
+      <a class="btn primary" href="#contacts">Связаться</a>
+      <a class="btn" href="https://github.com/dnchrdev">GitHub</a>
+      <a class="btn" href="#"><span class="ph">Резюме на hh</span></a>
+    </div>
+  </header>
+
+  <section id="games">
+    <div class="sh"><h2>Выпущенные игры</h2><span class="hint">в релизе, с реальными игроками</span></div>
+    <div class="games">
+      <article class="card">
+        <div class="media">трейлер / gif · 16:9</div>
+        <div class="body">
+          <div class="top"><h3><span class="ph">Название игры</span></h3><span class="badge">Steam</span></div>
+          <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
+          <div class="stats"><span><b class="ph">—</b> вишлистов</span><span><b class="ph">—</b> отзывов</span></div>
+          <div class="spec">роль: <span class="ph">всё сам / программист</span> · <span class="ph">Steamworks, сохранения, …</span></div>
+          <div class="links"><a href="#"><span class="ph">Страница в Steam</span></a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="media">трейлер / gif · 16:9</div>
+        <div class="body">
+          <div class="top"><h3><span class="ph">Название игры</span></h3><span class="badge">Яндекс Игры</span></div>
+          <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
+          <div class="stats"><span><b class="ph">—</b> игроков</span><span><b class="ph">—</b> рейтинг</span></div>
+          <div class="spec">роль: <span class="ph">всё сам / программист</span> · <span class="ph">WebGL, SDK, реклама, …</span></div>
+          <div class="links"><a href="#"><span class="ph">Играть</span></a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sh"><h2>Учебные проекты</h2><span class="hint">код открыт на GitHub</span></div>
+    <div class="projects">
+      <article class="project">
+        <div class="media">demo.gif</div>
+        <div class="body">
+          <div class="top"><h3>Cat Physics Sandbox</h3><span class="badge study">Clean Architecture</span></div>
+          <p>Физическая песочница от первого лица: кот хватает и швыряет предметы, сбивает ими патрулирующего человека и выполняет квесты.</p>
+          <ul>
+            <li>Игровые правила на чистом C#, Unity подключается через порты и адаптеры</li>
+            <li>Zenject: свой подконтейнер на каждого врага</li>
+            <li>Своё дерево поведения, Rigidbody-контроллер, рэгдолл</li>
+          </ul>
+          <div class="spec">Unity 6 · Zenject · UniTask · Addressables · WebGL</div>
+          <div class="links"><a href="https://github.com/dnchrdev/cat-physics-sandbox">GitHub</a><a href="#"><span class="ph">Играть</span></a></div>
+        </div>
+      </article>
+      <article class="project">
+        <div class="media">demo.gif</div>
+        <div class="body">
+          <div class="top"><h3>Squad Command</h3><span class="badge study">ECS + OOP</span></div>
+          <p>Управление отрядом в духе RTS: выделение юнитов и приказ на движение строем.</p>
+          <ul>
+            <li>Логика на ECS (Morpeh), управляющий слой на OOP по Clean Architecture</li>
+            <li>Назначение слотов строя венгерским алгоритмом</li>
+            <li>Около 200 unit-тестов в EditMode</li>
+          </ul>
+          <div class="spec">Unity · Morpeh · Zenject · UniTask · R3 · NUnit</div>
+          <div class="links"><a href="#"><span class="ph">GitHub</span></a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sh"><h2>Опыт</h2><span class="hint">4 года</span></div>
+    <div class="timeline">
+      <div class="job">
+        <span class="when"><span class="ph">2024 — 2026</span></span>
+        <div>
+          <h3><span class="ph">Компания / фриланс</span></h3>
+          <span class="engine">Unity</span>
+          <p><span class="ph">Что делал: проекты, зона ответственности, результат.</span></p>
+        </div>
+      </div>
+      <div class="job">
+        <span class="when"><span class="ph">2022 — 2024</span></span>
+        <div>
+          <h3><span class="ph">Компания / фриланс</span></h3>
+          <span class="engine">Unreal Engine</span>
+          <p><span class="ph">Что делал: проекты, зона ответственности, результат.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="sh"><h2>Стек</h2></div>
+    <div class="stack">
+      <div class="group">
+        <span class="label">Движки и язык</span>
+        <div class="tags"><span class="tag">Unity</span><span class="tag">Unreal Engine</span><span class="tag">C#</span></div>
+      </div>
+      <div class="group">
+        <span class="label">Архитектура</span>
+        <div class="tags"><span class="tag">Clean Architecture</span><span class="tag">ECS · Morpeh</span><span class="tag">Zenject</span><span class="tag">MVP</span></div>
+      </div>
+      <div class="group">
+        <span class="label">Библиотеки и инструменты</span>
+        <div class="tags"><span class="tag">UniTask</span><span class="tag">R3</span><span class="tag">Addressables</span><span class="tag">Input System</span><span class="tag">NUnit</span><span class="tag">DOTween</span><span class="tag">Git</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="sh"><h2>Контакты</h2></div>
+    <div class="contact-grid">
+      <div class="contact"><span class="label">Telegram</span><span class="v ph">@username</span></div>
+      <div class="contact"><span class="label">Почта</span><span class="v ph">name@mail.com</span></div>
+      <div class="contact"><span class="label">GitHub</span><a class="v" href="https://github.com/dnchrdev">github.com/dnchrdev</a></div>
+      <div class="contact"><span class="label">hh.ru</span><span class="v ph">ссылка на резюме</span></div>
+    </div>
+  </section>
+
+  <footer><span>dnchrdev</span><span>обновлено: октябрь 2026</span></footer>
+</main>
+</body>
+</html>
