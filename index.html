@@ -3,110 +3,183 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>dnchrdev — Unity Developer</title>
+<title>Денис Зарипов — Unity-разработчик</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 body{margin:0}
-/* Layout: one narrow column like a build sheet — hero, released games, study projects, experience, stack, contacts */
+/* Стиль: плоская цветная техника из ретрофутуристичных иллюстраций.
+   Фон цвета слоновой кости, корпус синий с жёлтой планкой, LCD-экраны с зелёным текстом,
+   диагональные полосы и решётка динамика как графические паттерны. Карточки без тяжёлых обводок:
+   их отделяет от фона цвет, а не контур. */
 :root{
-  --bg:#ECEEF1; --surface:#F7F8FA; --fg:#14171C; --muted:#5A6370; --line:#D3D8DF;
-  --accent:#2448D8; --accent-soft:#DCE3FB; --amber:#B86A00; --amber-soft:#F6E7CF;
-  --ph:#8A93A0;
+  --ivory:#F2F0E8;      /* фон */
+  --card:#FCFBF7;       /* карточки, почти белые */
+  --ink:#26272C; --muted:#5D5F68; --line:rgba(38,39,44,.10);
+  --blue:#2F97D4; --blue-deep:#1D6FA3;
+  --yellow:#F3B53F; --red:#E5484D; --orange:#F07A2B; --mint:#3CB98A;
+  --key:#2E3037; --key-fg:#F7F5EE;
+  --lcd:#12171A; --lcd-fg:#4BE3A2; --lcd-dim:#2D6E55;
+  --ph:#8E9099;
   --display:"Tektur","Onest",system-ui,sans-serif;
   --body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1216; --surface:#161A20; --fg:#E6E9ED; --muted:#98A1AD; --line:#262C35;
-  --accent:#7D97FF; --accent-soft:#1C2647; --amber:#F0B45A; --amber-soft:#3A2A12; --ph:#6E7784; color-scheme:dark}}
+  --ivory:#1B1C20; --card:#25272D; --ink:#EEEBE2; --muted:#A6A79F; --line:rgba(238,235,226,.10);
+  --key:#3A3D45; --key-fg:#EEEBE2; --ph:#80828A; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1216; --surface:#161A20; --fg:#E6E9ED; --muted:#98A1AD; --line:#262C35;
-  --accent:#7D97FF; --accent-soft:#1C2647; --amber:#F0B45A; --amber-soft:#3A2A12; --ph:#6E7784; color-scheme:dark}
+  --ivory:#1B1C20; --card:#25272D; --ink:#EEEBE2; --muted:#A6A79F; --line:rgba(238,235,226,.10);
+  --key:#3A3D45; --key-fg:#EEEBE2; --ph:#80828A; color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline;text-underline-offset:3px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:48px 64px;display:flex;flex-direction:column;gap:64px}
-
+body{background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--orange)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
+.wrap{max-width:960px;margin:0 auto;padding-inline:16px;padding-block:40px 64px;display:flex;flex-direction:column;gap:64px}
 .ph{color:var(--ph);border-bottom:1px dashed var(--ph)}
-.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
-/* hero */
-.hero{display:flex;flex-direction:column;gap:20px}
-.hero .url{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,8vw,72px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
-.hero .role{font-family:var(--display);font-weight:500;font-size:clamp(18px,3vw,24px);margin:0;color:var(--accent)}
-.hero p.lead{margin:0;max-width:62ch;font-size:18px;color:var(--fg)}
-.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted)}
-.chip-open{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;padding:6px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);align-self:flex-start}
-.chip-open::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.contacts-inline{display:flex;flex-wrap:wrap;gap:10px}
-.btn{font-family:var(--mono);font-size:13px;padding:9px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)}
-.btn.primary{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.btn:hover{text-decoration:none;border-color:var(--accent)}
+/* паттерны */
+.stripes{background:repeating-linear-gradient(-45deg,var(--blue) 0 7px,var(--card) 7px 14px)}
+.grille{background:radial-gradient(circle,rgba(0,0,0,.55) 0 4.5px,transparent 5.5px) 0 0/16px 16px,#8A6A4E}
 
-/* section heads */
-section{display:flex;flex-direction:column;gap:24px}
-.sh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:10px}
-.sh h2{font-family:var(--display);font-weight:700;font-size:26px;margin:0}
-.sh .hint{font-size:13px;color:var(--muted)}
+.card{background:var(--card);border-radius:18px;box-shadow:0 1px 0 var(--line),0 0 0 1px var(--line);min-width:0}
 
-/* game cards */
-.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.media{aspect-ratio:16/9;max-width:100%;display:grid;place-items:center;
-  background:repeating-linear-gradient(135deg,transparent 0 10px,color-mix(in srgb,var(--line) 70%,transparent) 10px 11px),var(--bg);
-  border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--ph)}
-.body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.card h3{font-family:var(--display);font-weight:500;font-size:20px;margin:0}
-.badge{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:4px 8px;border-radius:4px;background:var(--amber-soft);color:var(--amber);white-space:nowrap}
-.badge.study{background:var(--accent-soft);color:var(--accent)}
-.card p{margin:0;color:var(--muted);font-size:15px}
-.spec{font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
-.stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+.lcd{background:var(--lcd);color:var(--lcd-fg);border-radius:10px;box-shadow:inset 0 0 0 3px #0A0D0F,inset 0 0 28px rgba(75,227,162,.07)}
+
+/* ---------- hero: устройство ---------- */
+.hero{display:flex;flex-direction:column;gap:22px}
+.device{border-radius:22px;overflow:hidden;background:var(--blue);color:#fff}
+.dev-top{background:var(--yellow);color:#26272C;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 18px;font-size:14px;font-weight:500}
+.status{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.status::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 2px rgba(38,39,44,.25),0 0 8px var(--mint)}
+.dev-body{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:18px;padding:18px}
+.screen{padding:24px 24px 18px;display:flex;flex-direction:column;gap:10px}
+.screen h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,7vw,64px);line-height:1;margin:0;letter-spacing:.01em;text-shadow:0 0 14px rgba(75,227,162,.35)}
+.screen h1 .ph{color:var(--lcd-fg);border-bottom-color:var(--lcd-dim)}
+.screen .role{font-family:var(--mono);font-size:14px;margin:0;opacity:.85}
+.eq{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:6px}
+.eq i{flex:1;max-width:10px;background:var(--lcd-fg);opacity:.85;border-radius:1px;height:var(--h);transform-origin:bottom}
+.readout{display:flex;flex-wrap:wrap;gap:6px 28px;font-family:var(--mono);font-size:12px;opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .eq i{animation:eq 1.6s ease-in-out infinite alternate;animation-delay:var(--d)}
+  @keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+}
+.side{display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.side .grille{border-radius:10px;aspect-ratio:1}
+.side .stripes{border-radius:8px}
+.side .arrow{font-family:var(--display);font-size:34px;line-height:1;text-align:center;color:#fff;opacity:.9}
+.lead{margin:0;max-width:64ch;font-size:18px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;color:var(--muted)}
+
+/* клавиши */
+.keys{display:flex;flex-wrap:wrap;gap:12px}
+.key{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--display);font-weight:500;font-size:15px;padding:11px 18px;
+  background:var(--key);color:var(--key-fg);border:0;border-radius:10px;box-shadow:0 4px 0 rgba(0,0,0,.35);text-decoration:none;cursor:pointer}
+.key:hover{color:var(--key-fg);filter:brightness(1.15)}
+.key:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+.key.rec{background:var(--red);color:#fff}
+.key.blue{background:var(--blue);color:#fff}
+
+/* ---------- заголовки разделов ---------- */
+section{display:flex;flex-direction:column;gap:22px}
+.sh{display:flex;flex-direction:column;gap:10px}
+.sh-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sh h2{font-family:var(--display);font-weight:700;font-size:30px;margin:0}
+.sh .hint{font-size:14px;color:var(--muted)}
+.sh .band{height:8px;border-radius:4px}
+.band.blue{background:repeating-linear-gradient(-45deg,var(--blue) 0 7px,transparent 7px 14px)}
+.band.yellow{background:repeating-linear-gradient(-45deg,var(--yellow) 0 7px,transparent 7px 14px)}
+.band.red{background:repeating-linear-gradient(-45deg,var(--red) 0 7px,transparent 7px 14px)}
+.band.mint{background:repeating-linear-gradient(-45deg,var(--mint) 0 7px,transparent 7px 14px)}
+
+/* ---------- карусель проектов ---------- */
+.deck{overflow:hidden}
+.deck-bar{display:flex;align-items:center;gap:10px;padding:14px;background:var(--key);border-radius:18px 18px 0 0}
+.nav{width:52px;height:52px;flex:none;border-radius:50%;padding:0;font-size:0}
+.nav svg{width:22px;height:22px}
+.nav.prev,.nav.next{background:var(--orange);color:#26272C}
+.timer{flex:1;min-width:0;display:flex;align-items:center;gap:14px;padding:10px 14px;font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+.progress{flex:1;height:8px;border-radius:4px;background:#22302B;overflow:hidden;min-width:40px}
+.progress i{display:block;height:100%;width:100%;background:var(--lcd-fg);transform-origin:left;transform:scaleX(0)}
+.timer .count{white-space:nowrap;opacity:.8}
+.timer .state{white-space:nowrap}
+.play{width:52px;height:52px;flex:none;padding:0;background:var(--key-fg);color:#26272C}
+.play svg{width:20px;height:20px}
+
+.tabs{position:relative;overflow:hidden;padding:14px 0 4px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
+.tabs-track{display:flex;gap:10px;width:max-content;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.tab{flex:none;display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-size:15px;font-weight:600;padding:9px 16px;border-radius:999px;border:0;background:var(--ivory);color:var(--muted);cursor:pointer;transition:background .3s,color .3s,transform .3s}
+.tab::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--card);transform:scale(1.06)}
+
+.viewport{overflow:hidden;touch-action:pan-y}
+.track{display:flex;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.slide{flex:0 0 100%;min-width:0;padding:16px;display:flex;flex-direction:column;gap:18px}
+.shot{position:relative;width:100%;aspect-ratio:16/9;display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--lcd-dim);
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(75,227,162,.05) 3px 4px),var(--lcd)}
+.shot{overflow:hidden}
+.shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.shot::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:10px;border-radius:0 0 10px 10px;background:repeating-linear-gradient(-45deg,var(--c) 0 7px,transparent 7px 14px);opacity:.9}
+.info{display:flex;flex-direction:column;gap:12px;padding:0 6px 6px;max-width:72ch}
+.info .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tape{font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--c);color:#1E1F25;white-space:nowrap}
+.kind{font-size:13px;color:var(--muted)}
+.info h3{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1;margin:0}
+.info p{margin:0;font-size:16px}
+.info ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+.info ul li::marker{color:var(--c)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:15px}
 .stats b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
-.links{display:flex;flex-wrap:wrap;gap:14px;font-size:14px}
+.spec{font-size:14.5px;color:var(--muted);padding-top:10px;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:18px;font-size:15px;font-weight:600}
 
-/* projects list */
-.projects{display:flex;flex-direction:column;gap:20px}
-.project{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.project .media{border-bottom:0;border-right:1px solid var(--line);height:100%}
-.project ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px;display:flex;flex-direction:column;gap:4px}
-
-/* experience */
-.timeline{display:flex;flex-direction:column}
-.job{display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+/* ---------- опыт ---------- */
+.timeline{display:flex;flex-direction:column;padding:6px 20px}
+.job{display:grid;grid-template-columns:190px minmax(0,1fr);gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
 .job:last-child{border-bottom:0}
-.when{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.job h3{margin:0 0 4px;font-size:17px;font-weight:600}
-.job .engine{font-family:var(--mono);font-size:12px;color:var(--accent)}
-.job p{margin:6px 0 0;color:var(--muted);font-size:15px;max-width:65ch}
+.when{align-self:start;font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.02em;padding:8px 12px;font-variant-numeric:tabular-nums;text-align:center;text-shadow:0 0 10px rgba(75,227,162,.35)}
+.when .ph{color:var(--lcd-fg);border-bottom-color:var(--lcd-dim)}
+.job h3{margin:0 0 2px;font-size:19px;font-weight:700}
+.engine{display:inline-block;font-size:13px;font-weight:700;padding:2px 8px;border-radius:5px;color:#1E1F25}
+.engine.u{background:var(--blue);color:#fff}
+.engine.ue{background:var(--yellow)}
+.job p{margin:8px 0 0;font-size:15.5px;max-width:65ch}
 
-/* stack */
-.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.group{display:flex;flex-direction:column;gap:10px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--mono);font-size:12.5px;padding:5px 9px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+/* ---------- стек ---------- */
+.stack{margin:0;padding:6px 22px}
+.row{display:grid;grid-template-columns:210px minmax(0,1fr);gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row dt{font-family:var(--display);font-weight:700;font-size:16px;display:flex;align-items:baseline;gap:10px}
+.row dt::before{content:"";flex:none;width:10px;height:10px;border-radius:3px;background:var(--c);transform:translateY(-1px)}
+.row dd{margin:0;font-size:16px;line-height:1.6}
 
-/* contacts */
-.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.contact{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
+/* ---------- контакты ---------- */
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-left:6px solid var(--c)}
+.contact .k{font-weight:700}
 .contact .v{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;text-align:right}
 
-footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:16px}
+footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted)}
+footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
 
-@media (max-width:720px){
-  .games,.stack,.contact-grid{grid-template-columns:minmax(0,1fr)}
-  .project{grid-template-columns:minmax(0,1fr)}
-  .project .media{border-right:0;border-bottom:1px solid var(--line);height:auto}
-  .job{grid-template-columns:minmax(0,1fr);gap:4px}
+@media (max-width:760px){
+  .dev-body{grid-template-columns:minmax(0,1fr)}
+  .side{grid-template-rows:none;grid-template-columns:72px minmax(0,1fr);align-items:stretch}
+  .side .arrow{display:none}
+  .slide{padding:12px;gap:14px}
+  .info h3{font-size:24px}
+  .contact-grid{grid-template-columns:minmax(0,1fr)}
+  .job,.row{grid-template-columns:minmax(0,1fr);gap:6px}
+  .when{justify-self:start}
+  .deck-bar{flex-wrap:wrap}
+  .timer{order:-1;flex-basis:100%}
+  .nav.prev{margin-right:auto}
 }
-@media (prefers-reduced-motion:no-preference){.btn,.card{transition:border-color .15s}}
+@media (prefers-reduced-motion:reduce){.track,.tabs-track,.tab{transition:none}}
 </style>
 </head>
 <body>
@@ -114,133 +187,333 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;ju
 <main class="wrap">
 
   <header class="hero">
-    <span class="url">dnchrdev.github.io</span>
-    <span class="chip-open">Открыт к предложениям</span>
-    <h1><span class="ph">Имя Фамилия</span></h1>
-    <p class="role">Unity-разработчик · геймплей и архитектура</p>
-    <p class="lead">4 года в геймдеве: 2 года на Unreal Engine, 2 года на Unity. Пишу геймплей на C# с упором на архитектуру: Clean Architecture, DI, ECS, unit-тесты. <span class="ph">Одна фраза о том, какую работу ищешь.</span></p>
+    <div class="device">
+      <div class="dev-top">
+        <span>dnchrdev.github.io</span>
+      </div>
+      <div class="dev-body">
+        <div class="screen lcd">
+          <h1>Денис Зарипов</h1>
+          <p class="role">Unity-разработчик · геймплей и архитектура</p>
+          <div class="eq" aria-hidden="true">
+            <i style="--h:40%;--d:-.2s"></i><i style="--h:65%;--d:-.9s"></i><i style="--h:85%;--d:-.4s"></i><i style="--h:55%;--d:-1.2s"></i><i style="--h:95%;--d:-.6s"></i><i style="--h:70%;--d:-.1s"></i><i style="--h:45%;--d:-1.4s"></i><i style="--h:80%;--d:-.7s"></i><i style="--h:60%;--d:-.3s"></i><i style="--h:90%;--d:-1.1s"></i><i style="--h:50%;--d:-.5s"></i><i style="--h:75%;--d:-1.3s"></i><i style="--h:35%;--d:-.8s"></i><i style="--h:65%;--d:-.15s"></i><i style="--h:85%;--d:-1s"></i><i style="--h:55%;--d:-.45s"></i><i style="--h:30%;--d:-1.5s"></i><i style="--h:70%;--d:-.65s"></i><i style="--h:45%;--d:-.25s"></i><i style="--h:60%;--d:-.95s"></i><i style="--h:40%;--d:-1.25s"></i><i style="--h:25%;--d:-.55s"></i>
+          </div>
+          <div class="readout"><span>Unity · 2 года</span><span>Unreal Engine · 1 год</span><span>C#</span></div>
+        </div>
+        <div class="side" aria-hidden="true">
+          <div class="grille"></div>
+          <div class="stripes"></div>
+          <div class="arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="lead">3 года в геймдеве: 1 год на Unreal Engine, 2 года на Unity.<br>Ищу работу Unity-разработчиком в игровой студии.</p>
     <div class="meta">
+      <span>25 лет</span>
       <span><span class="ph">Город</span></span>
       <span><span class="ph">Удалёнка / офис / релокация</span></span>
     </div>
-    <div class="contacts-inline">
-      <a class="btn primary" href="#contacts">Связаться</a>
-      <a class="btn" href="https://github.com/dnchrdev">GitHub</a>
-      <a class="btn" href="#"><span class="ph">Резюме на hh</span></a>
+    <div class="keys">
+      <a class="key rec" href="#contacts">Связаться</a>
+      <a class="key" href="https://github.com/dnchrdev">GitHub</a>
+      <a class="key blue" href="#"><span class="ph" style="color:#fff;border-bottom-color:rgba(255,255,255,.6)">Резюме на hh</span></a>
     </div>
   </header>
 
   <section id="games">
-    <div class="sh"><h2>Выпущенные игры</h2><span class="hint">в релизе, с реальными игроками</span></div>
-    <div class="games">
-      <article class="card">
-        <div class="media">трейлер / gif · 16:9</div>
-        <div class="body">
-          <div class="top"><h3><span class="ph">Название игры</span></h3><span class="badge">Steam</span></div>
-          <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
-          <div class="stats"><span><b class="ph">—</b> вишлистов</span><span><b class="ph">—</b> отзывов</span></div>
-          <div class="spec">роль: <span class="ph">всё сам / программист</span> · <span class="ph">Steamworks, сохранения, …</span></div>
-          <div class="links"><a href="#"><span class="ph">Страница в Steam</span></a></div>
+    <div class="sh">
+      <div class="sh-row"><h2>Игры и прототипы</h2></div>
+      <div class="band blue"></div>
+    </div>
+    <div class="deck card" role="region" aria-roledescription="карусель" aria-label="Игры и прототипы">
+      <div class="deck-bar">
+        <button class="key nav prev" type="button" aria-label="Предыдущий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="timer lcd" aria-hidden="true">
+          <span class="state">▶</span>
+          <span class="progress"><i></i></span>
+          <span class="time">00:08</span>
+          <span class="count"></span>
         </div>
-      </article>
-      <article class="card">
-        <div class="media">трейлер / gif · 16:9</div>
-        <div class="body">
-          <div class="top"><h3><span class="ph">Название игры</span></h3><span class="badge">Яндекс Игры</span></div>
-          <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
-          <div class="stats"><span><b class="ph">—</b> игроков</span><span><b class="ph">—</b> рейтинг</span></div>
-          <div class="spec">роль: <span class="ph">всё сам / программист</span> · <span class="ph">WebGL, SDK, реклама, …</span></div>
-          <div class="links"><a href="#"><span class="ph">Играть</span></a></div>
+        <button class="key play" type="button" aria-label="Остановить автопрокрутку"></button>
+        <button class="key nav next" type="button" aria-label="Следующий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="tabs" role="tablist"><div class="tabs-track"></div></div>
+      <div class="viewport">
+        <div class="track">
+
+          <article class="slide" style="--c:var(--yellow)" data-title="Dragon Heartburn">
+            <div class="shot lcd"><video src="media/dragon_heartburn.mp4" poster="media/DH_1232_d_2.png" muted loop playsinline preload="none" aria-label="Геймплей Dragon Heartburn"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">Steam Demo</span><span class="kind">Unreal Engine</span></div>
+              <h3>Dragon Heartburn</h3>
+              <p>Топ-даун шутер с головоломками: у дракона посреди рабочего дня изжога, и ему нужно добраться до медпункта, не задев коллег.</p>
+              <ul>
+                <li>Физика и разрушаемая офисная мебель</li>
+                <li>Задел коллегу — уровень начинается заново</li>
+              </ul>
+              <div class="links"><a href="https://store.steampowered.com/app/3075810/Dragon_Heartburn/">Страница в Steam</a></div>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--red)" data-title="Яндекс Игры">
+            <div class="shot lcd">трейлер / gif · 16:9</div>
+            <div class="info">
+              <div class="top"><span class="tape">Яндекс Игры</span><span class="kind">Unity</span></div>
+              <h3><span class="ph">Название игры</span></h3>
+              <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
+              <div class="links"><a href="#"><span class="ph">Играть</span></a></div>
+            </div>
+          </article>
+
         </div>
-      </article>
+      </div>
     </div>
   </section>
 
   <section id="projects">
-    <div class="sh"><h2>Учебные проекты</h2><span class="hint">код открыт на GitHub</span></div>
-    <div class="projects">
-      <article class="project">
-        <div class="media">demo.gif</div>
-        <div class="body">
-          <div class="top"><h3>Cat Physics Sandbox</h3><span class="badge study">Clean Architecture</span></div>
-          <p>Физическая песочница от первого лица: кот хватает и швыряет предметы, сбивает ими патрулирующего человека и выполняет квесты.</p>
-          <ul>
-            <li>Игровые правила на чистом C#, Unity подключается через порты и адаптеры</li>
-            <li>Zenject: свой подконтейнер на каждого врага</li>
-            <li>Своё дерево поведения, Rigidbody-контроллер, рэгдолл</li>
-          </ul>
-          <div class="spec">Unity 6 · Zenject · UniTask · Addressables · WebGL</div>
-          <div class="links"><a href="https://github.com/dnchrdev/cat-physics-sandbox">GitHub</a><a href="#"><span class="ph">Играть</span></a></div>
+    <div class="sh">
+      <div class="sh-row"><h2>Проекты на GitHub</h2></div>
+      <div class="band mint"></div>
+    </div>
+    <div class="deck card" role="region" aria-roledescription="карусель" aria-label="Проекты на GitHub">
+      <div class="deck-bar">
+        <button class="key nav prev" type="button" aria-label="Предыдущий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="timer lcd" aria-hidden="true">
+          <span class="state">▶</span>
+          <span class="progress"><i></i></span>
+          <span class="time">00:08</span>
+          <span class="count"></span>
         </div>
-      </article>
-      <article class="project">
-        <div class="media">demo.gif</div>
-        <div class="body">
-          <div class="top"><h3>Squad Command</h3><span class="badge study">ECS + OOP</span></div>
-          <p>Управление отрядом в духе RTS: выделение юнитов и приказ на движение строем.</p>
-          <ul>
-            <li>Логика на ECS (Morpeh), управляющий слой на OOP по Clean Architecture</li>
-            <li>Назначение слотов строя венгерским алгоритмом</li>
-            <li>Около 200 unit-тестов в EditMode</li>
-          </ul>
-          <div class="spec">Unity · Morpeh · Zenject · UniTask · R3 · NUnit</div>
-          <div class="links"><a href="#"><span class="ph">GitHub</span></a></div>
+        <button class="key play" type="button" aria-label="Остановить автопрокрутку"></button>
+        <button class="key nav next" type="button" aria-label="Следующий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="tabs" role="tablist"><div class="tabs-track"></div></div>
+      <div class="viewport">
+        <div class="track">
+
+          <article class="slide" style="--c:var(--blue)" data-title="Cat Physics Sandbox">
+            <div class="shot lcd">demo.gif</div>
+            <div class="info">
+              <div class="top"><span class="tape">Clean Architecture</span><span class="kind">Unity 6</span></div>
+              <h3>Cat Physics Sandbox</h3>
+              <p>Физическая песочница от первого лица: кот хватает и швыряет предметы, сбивает ими патрулирующего человека и выполняет квесты.</p>
+              <ul>
+                <li>Игровые правила на чистом C#, Unity подключается через порты и адаптеры</li>
+                <li>Захват и бросок предметов, система квестов</li>
+                <li>Своё дерево поведения, Rigidbody-контроллер, рэгдолл</li>
+              </ul>
+              <div class="spec">Unity 6, Zenject, UniTask, Addressables, WebGL</div>
+              <div class="links"><a href="https://github.com/dnchrdev/cat-physics-sandbox">GitHub</a><a href="#"><span class="ph">Играть</span></a></div>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--mint)" data-title="Squad Command">
+            <div class="shot lcd">demo.gif</div>
+            <div class="info">
+              <div class="top"><span class="tape">ECS + OOP</span><span class="kind">Unity</span></div>
+              <h3>Squad Command</h3>
+              <p>Управление отрядом в духе RTS: выделение юнитов и приказ на движение строем.</p>
+              <ul>
+                <li>Логика на ECS (Morpeh), управляющий слой на OOP по Clean Architecture</li>
+                <li>Назначение слотов строя венгерским алгоритмом</li>
+                <li>Около 200 unit-тестов в EditMode</li>
+              </ul>
+              <div class="spec">Unity, Morpeh, Zenject, UniTask, R3, NUnit</div>
+              <div class="links"><a href="#"><span class="ph">GitHub</span></a></div>
+            </div>
+          </article>
+
         </div>
-      </article>
+      </div>
     </div>
   </section>
 
   <section id="experience">
-    <div class="sh"><h2>Опыт</h2><span class="hint">4 года</span></div>
-    <div class="timeline">
+    <div class="sh">
+      <div class="sh-row"><h2>Опыт</h2></div>
+      <div class="band yellow"></div>
+    </div>
+    <div class="timeline card">
       <div class="job">
-        <span class="when"><span class="ph">2024 — 2026</span></span>
+        <span class="when lcd">2024 — 2026</span>
         <div>
-          <h3><span class="ph">Компания / фриланс</span></h3>
-          <span class="engine">Unity</span>
-          <p><span class="ph">Что делал: проекты, зона ответственности, результат.</span></p>
+          <h3>DNCHRDEV, инди-разработка соло</h3>
+          <span class="engine u">Unity</span>
+          <p>Игры и прототипы на Unity от идеи до сборки: геймплей, архитектура, публикация.</p>
         </div>
       </div>
       <div class="job">
-        <span class="when"><span class="ph">2022 — 2024</span></span>
+        <span class="when lcd">2023 — 2024</span>
         <div>
-          <h3><span class="ph">Компания / фриланс</span></h3>
-          <span class="engine">Unreal Engine</span>
-          <p><span class="ph">Что делал: проекты, зона ответственности, результат.</span></p>
+          <h3>DNCHRDEV, инди-разработка соло</h3>
+          <span class="engine ue">Unreal Engine</span>
+          <p>Разработка Dragon Heartburn, топ-даун шутера с головоломками. Довёл игру до демо в Steam.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="stack">
-    <div class="sh"><h2>Стек</h2></div>
-    <div class="stack">
-      <div class="group">
-        <span class="label">Движки и язык</span>
-        <div class="tags"><span class="tag">Unity</span><span class="tag">Unreal Engine</span><span class="tag">C#</span></div>
-      </div>
-      <div class="group">
-        <span class="label">Архитектура</span>
-        <div class="tags"><span class="tag">Clean Architecture</span><span class="tag">ECS · Morpeh</span><span class="tag">Zenject</span><span class="tag">MVP</span></div>
-      </div>
-      <div class="group">
-        <span class="label">Библиотеки и инструменты</span>
-        <div class="tags"><span class="tag">UniTask</span><span class="tag">R3</span><span class="tag">Addressables</span><span class="tag">Input System</span><span class="tag">NUnit</span><span class="tag">DOTween</span><span class="tag">Git</span></div>
-      </div>
+    <div class="sh">
+      <div class="sh-row"><h2>Стек</h2></div>
+      <div class="band red"></div>
     </div>
+    <dl class="stack card">
+      <div class="row" style="--c:var(--blue)"><dt>Движок и язык</dt><dd>Unity, C#, ООП, SOLID, паттерны проектирования, чистый код</dd></div>
+      <div class="row" style="--c:var(--yellow)"><dt>Архитектура</dt><dd>Clean Architecture, ECS (Morpeh), Zenject, MVP</dd></div>
+      <div class="row" style="--c:var(--mint)"><dt>ИИ персонажей</dt><dd>FSM, Behaviour Trees, Utility AI, pathfinding (A*, NavMesh)</dd></div>
+      <div class="row" style="--c:var(--red)"><dt>Библиотеки и инструменты</dt><dd>UniTask, R3, Addressables, JSON (JsonUtility, Newtonsoft), NUnit, DOTween, Git, Rider</dd></div>
+      <div class="row" style="--c:var(--orange)"><dt>Оптимизация</dt><dd>Профилирование (Unity Profiler, Frame Debugger), Object Pooling, снижение GC-аллокаций, оптимизация под мобильные устройства</dd></div>
+      <div class="row" style="--c:var(--blue-deep)"><dt>Мобильная разработка</dt><dd>Тач-управление и виртуальные джойстики, адаптивный UI, интеграция рекламы, IAP и аналитики</dd></div>
+      <div class="row" style="--c:var(--yellow)"><dt>Сцена и анимация</dt><dd>Animator, освещение сцены (baked и realtime, Light Probes, Reflection Probes), Terrain, Splines</dd></div>
+      <div class="row" style="--c:var(--red)"><dt>Другое</dt><dd>Unreal Engine (Blueprints), Blender (low-poly моделирование, UV-развёртка, текстурирование, анимация), Photoshop (рисование текстур)</dd></div>
+    </dl>
   </section>
 
   <section id="contacts">
-    <div class="sh"><h2>Контакты</h2></div>
+    <div class="sh">
+      <div class="sh-row"><h2>Контакты</h2></div>
+      <div class="band mint"></div>
+    </div>
     <div class="contact-grid">
-      <div class="contact"><span class="label">Telegram</span><span class="v ph">@username</span></div>
-      <div class="contact"><span class="label">Почта</span><span class="v ph">name@mail.com</span></div>
-      <div class="contact"><span class="label">GitHub</span><a class="v" href="https://github.com/dnchrdev">github.com/dnchrdev</a></div>
-      <div class="contact"><span class="label">hh.ru</span><span class="v ph">ссылка на резюме</span></div>
+      <div class="contact card" style="--c:var(--blue)"><span class="k">Telegram</span><span class="v ph">@username</span></div>
+      <div class="contact card" style="--c:var(--yellow)"><span class="k">Почта</span><span class="v ph">name@mail.com</span></div>
+      <div class="contact card" style="--c:var(--red)"><span class="k">GitHub</span><a class="v" href="https://github.com/dnchrdev">github.com/dnchrdev</a></div>
+      <div class="contact card" style="--c:var(--mint)"><span class="k">hh.ru</span><span class="v ph">ссылка на резюме</span></div>
     </div>
   </section>
 
-  <footer><span>dnchrdev</span><span>обновлено: октябрь 2026</span></footer>
+  <footer><span>dnchrdev</span><span class="stripes" aria-hidden="true"></span><span>обновлено: октябрь 2026</span></footer>
 </main>
+
+<script>
+(() => {
+  const DURATION = 8000; // мс на один проект
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
+  const fmt = ms => '00:' + String(Math.ceil(ms / 1000)).padStart(2, '0');
+
+  document.querySelectorAll('.deck').forEach(deck => {
+    const track = deck.querySelector('.track');
+    const slides = [...deck.querySelectorAll('.slide')];
+    const tabsBox = deck.querySelector('.tabs');
+    const tabsTrack = deck.querySelector('.tabs-track');
+    const bar = deck.querySelector('.progress i');
+    const timeEl = deck.querySelector('.time');
+    const countEl = deck.querySelector('.count');
+    const stateEl = deck.querySelector('.state');
+    const playBtn = deck.querySelector('.play');
+
+    let index = 0, elapsed = 0, last = 0;
+    let userPaused = reduce;  // при отключённой анимации автопрокрутка выключена, включается кнопкой
+    let visible = false;      // таймер идёт, только пока карточку видно на экране
+
+    const tabs = slides.map((s, i) => {
+      s.setAttribute('aria-roledescription', 'слайд');
+      s.setAttribute('aria-label', `${i + 1} из ${slides.length}: ${s.dataset.title}`);
+      const b = document.createElement('button');
+      b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab');
+      b.style.setProperty('--c', getComputedStyle(s).getPropertyValue('--c'));
+      b.textContent = s.dataset.title;
+      b.addEventListener('click', () => go(i));
+      tabsTrack.appendChild(b);
+      return b;
+    });
+
+    // выбранный ярлык всегда по центру, лента ярлыков сдвигается к нему
+    function centerTab() {
+      const t = tabs[index];
+      const x = tabsBox.clientWidth / 2 - (t.offsetLeft + t.offsetWidth / 2);
+      tabsTrack.style.transform = `translateX(${x}px)`;
+    }
+
+    const dur = () => +slides[index].dataset.ms || DURATION;
+    const running = () => !userPaused && visible && !document.hidden;
+
+    function paint() {
+      bar.style.transform = `scaleX(${Math.min(1, elapsed / dur())})`;
+      timeEl.textContent = fmt(Math.max(0, dur() - elapsed));
+      stateEl.textContent = running() ? '▶' : '❚❚';
+      track.setAttribute('aria-live', userPaused ? 'polite' : 'off');
+    }
+
+    function render() {
+      track.style.transform = `translateX(${-index * 100}%)`;
+      slides.forEach((s, i) => { s.inert = i !== index; s.setAttribute('aria-hidden', i !== index); });
+      tabs.forEach((t, i) => t.setAttribute('aria-selected', i === index));
+      countEl.textContent = `${index + 1} / ${slides.length}`;
+      centerTab();
+      paint();
+    }
+
+    function go(i) { index = (i + slides.length) % slides.length; elapsed = 0; render(); syncVideos(true); }
+
+    // видео играет только в открытой карточке и только пока карусель на экране
+    const videos = slides.map(s => s.querySelector('video'));
+    if (reduce) videos.forEach(v => v && (v.controls = true));
+    videos.forEach((v, i) => v && v.addEventListener('loadedmetadata', () => {
+      slides[i].dataset.ms = Math.max(DURATION, Math.round(v.duration * 1000));
+      paint();
+    }));
+    function syncVideos(restart) {
+      videos.forEach((v, i) => {
+        if (!v) return;
+        if (i === index && visible && !document.hidden && !reduce) {
+          if (restart) v.currentTime = 0;
+          v.play().catch(() => {});
+        } else v.pause();
+      });
+    }
+
+    function tick(t) {
+      const dt = last ? t - last : 0; last = t;
+      if (running()) {
+        elapsed += dt;
+        if (elapsed >= dur()) go(index + 1); else paint();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function setUserPaused(p) {
+      userPaused = p;
+      playBtn.setAttribute('aria-label', p ? 'Запустить автопрокрутку' : 'Остановить автопрокрутку');
+      playBtn.innerHTML = p ? PLAY : PAUSE;
+      paint();
+    }
+
+    deck.querySelector('.prev').addEventListener('click', () => go(index - 1));
+    deck.querySelector('.next').addEventListener('click', () => go(index + 1));
+    playBtn.addEventListener('click', () => setUserPaused(!userPaused));
+
+    deck.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+    });
+
+    // свайп на телефоне
+    let x0 = null;
+    const vp = deck.querySelector('.viewport');
+    vp.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') x0 = e.clientX; });
+    vp.addEventListener('pointerup', e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+    });
+
+    // таймер идёт, только пока сама панель с таймером видна на экране
+    new IntersectionObserver(([e]) => { visible = e.intersectionRatio >= 0.6; paint(); syncVideos(false); },
+      {threshold: [0, 0.6, 1]}).observe(deck.querySelector('.deck-bar'));
+    document.addEventListener('visibilitychange', () => { paint(); syncVideos(false); });
+    addEventListener('resize', centerTab);
+    document.fonts && document.fonts.ready.then(centerTab);
+
+    setUserPaused(userPaused);
+    render();
+    requestAnimationFrame(tick);
+  });
+})();
+</script>
 </body>
 </html>
