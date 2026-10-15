@@ -122,15 +122,18 @@ section{display:flex;flex-direction:column;gap:22px}
 .shot{position:relative;width:100%;aspect-ratio:16/9;display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--lcd-dim);
   background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(75,227,162,.05) 3px 4px),var(--lcd)}
 .shot{overflow:hidden}
+.shot-title{font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,52px);line-height:1.05;text-align:center;padding:0 24px;color:var(--lcd-fg);text-shadow:0 0 18px rgba(75,227,162,.4);text-wrap:balance}
 .shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .shot::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:10px;border-radius:0 0 10px 10px;background:repeating-linear-gradient(-45deg,var(--c) 0 7px,transparent 7px 14px);opacity:.9}
 .info{display:flex;flex-direction:column;gap:12px;padding:0 6px 6px;max-width:72ch}
 .info .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.tape{font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--c);color:#1E1F25;white-space:nowrap}
-.kind{font-size:13px;color:var(--muted)}
+.tape{font-size:15px;font-weight:700;padding:5px 12px;border-radius:6px;background:var(--c);color:#1E1F25;white-space:nowrap}
+.kind{font-size:15px;font-weight:500;color:var(--muted)}
 .info h3{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1;margin:0}
 .info p{margin:0;font-size:16px}
-.info ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:15.5px}
+.info ul{margin:0;padding-left:18px;font-size:15.5px;columns:2;column-gap:36px}
+.info li{break-inside:avoid;margin-bottom:6px}
+.info{max-width:none}
 .info ul li::marker{color:var(--c)}
 .stats{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:15px}
 .stats b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
@@ -171,6 +174,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
   .side{grid-template-rows:none;grid-template-columns:72px minmax(0,1fr);align-items:stretch}
   .side .arrow{display:none}
   .slide{padding:12px;gap:14px}
+  .info ul{columns:1}
   .info h3{font-size:24px}
   .contact-grid{grid-template-columns:minmax(0,1fr)}
   .job,.row{grid-template-columns:minmax(0,1fr);gap:6px}
@@ -245,24 +249,106 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           <article class="slide" style="--c:var(--yellow)" data-title="Dragon Heartburn">
             <div class="shot lcd"><video src="media/dragon_heartburn.mp4" poster="media/DH_1232_d_2.png" muted loop playsinline preload="none" aria-label="Геймплей Dragon Heartburn"></video></div>
             <div class="info">
-              <div class="top"><span class="tape">Steam Demo</span><span class="kind">Unreal Engine</span></div>
+              <div class="top"><span class="tape">Steam Demo</span><span class="kind">Unreal Engine · ПК и мобильные</span></div>
               <h3>Dragon Heartburn</h3>
               <p>Топ-даун шутер с головоломками: у дракона посреди рабочего дня изжога, и ему нужно добраться до медпункта, не задев коллег.</p>
               <ul>
                 <li>Физика и разрушаемая офисная мебель</li>
-                <li>Задел коллегу — уровень начинается заново</li>
+                <li>Настраиваемое качество графики</li>
+                <li>Управление для ПК и мобильных устройств</li>
               </ul>
               <div class="links"><a href="https://store.steampowered.com/app/3075810/Dragon_Heartburn/">Страница в Steam</a></div>
             </div>
           </article>
 
-          <article class="slide" style="--c:var(--red)" data-title="Яндекс Игры">
-            <div class="shot lcd">трейлер / gif · 16:9</div>
+          <article class="slide" style="--c:var(--red)" data-title="Strike Sandbox">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Strike Sandbox</span></div>
             <div class="info">
-              <div class="top"><span class="tape">Яндекс Игры</span><span class="kind">Unity</span></div>
-              <h3><span class="ph">Название игры</span></h3>
-              <p><span class="ph">Жанр и суть игры в одной строке.</span></p>
-              <div class="links"><a href="#"><span class="ph">Играть</span></a></div>
+              <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · ПК и мобильные</span></div>
+              <h3>Strike Sandbox</h3>
+              <p>Песочница без целей и ограничений: строй арены из блоков, спавни персонажей, раздавай им оружие и смотри, как разворачивается бой. Взрывы, разрушения и хаос по твоим правилам.</p>
+              <ul>
+                <li>Иконки оружия, персонажей и блоков генерируются динамически</li>
+                <li>Меши блоков и текстуры строятся на лету с учётом поворота блоков (лестницы и т.&nbsp;п.)</li>
+                <li>Конфиги всего генерируемого контента хранятся в JSON</li>
+                <li>Строительство, разрушение и воксельное освещение как в Minecraft</li>
+                <li>Мир разбит на чанки, их количество задаётся при создании мира</li>
+                <li>ИИ перестраивает путь, когда блоки разрушаются</li>
+                <li>Локальные сохранения в JSON</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--blue)" data-title="Squirrel and Woodcutter">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Squirrel and Woodcutter</span><video src="media/squirrel.mp4" muted loop playsinline preload="none" aria-label="Геймплей Squirrel and Woodcutter"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · ПК и мобильные · до 3 тыс. MAU</span></div>
+              <h3>Squirrel and Woodcutter</h3>
+              <p>Симулятор хитрой белки от первого лица: сломай все инструменты злого дровосека, собери еду в дом белки и не дай себя поймать.</p>
+              <ul>
+                <li>Собственный контроллер от первого лица, физическое взаимодействие с объектами</li>
+                <li>ИИ дровосека: патруль по сплайну на террейне, зрение, состояния патруля, погони и броска топора</li>
+                <li>Оптимизация: LOD, геометрия, текстуры, батчинг</li>
+                <li>Запечённый свет и его оптимизация</li>
+                <li>Бустеры персонажа за просмотр рекламы</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--mint)" data-title="Crime Playground">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Crime Playground</span><video src="media/crime_playground.mp4" muted loop playsinline preload="none" aria-label="Геймплей Crime Playground"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">Прототип</span><span class="kind">Unity · ПК</span></div>
+              <h3>Crime Playground</h3>
+              <p>Топ-даун шутер, небольшой клон GTA.</p>
+              <ul>
+                <li>Стрельба, ближний бой, вождение машин</li>
+                <li>Динамический городской трафик и пешеходы</li>
+                <li>Уровни хаоса: полиция преследует игрока пешком и на машинах, в том числе по вертикали (связка нескольких NavMesh)</li>
+                <li>Спавн объектов на карте, интерактивные объекты, открываемые зоны</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--orange)" data-title="Kitten and the Doctor">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Kitten and the Doctor</span><video src="media/cat.mp4" muted loop playsinline preload="none" aria-label="Геймплей Kitten and the Doctor"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · ПК и мобильные · до 6 тыс. MAU</span></div>
+              <h3>Kitten and the Doctor</h3>
+              <p>Симулятор котёнка от первого лица в жуткой больнице: разбей все сосуды злого доктора, собери рыбки-печеньки и не дай себя поймать.</p>
+              <ul>
+                <li>Система квестов и подсказки за просмотр рекламы</li>
+                <li>Оптимизация: Occlusion Culling, батчинг</li>
+                <li>Оптимизация запечённого света</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--blue-deep)" data-title="Ragdoll Parkour Challenges">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Ragdoll Parkour Challenges</span><video src="media/ragdoll.mp4" muted loop playsinline preload="none" aria-label="Геймплей Ragdoll Parkour Challenges"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · ПК и мобильные</span></div>
+              <h3>Ragdoll Parkour Challenges</h3>
+              <p>Паркур с беспощадной рэгдолл-физикой: беги, прыгай, скользи и замедляй время, уворачиваясь от пил, молотов и лазеров, и собирай труднодоступные монеты.</p>
+              <ul>
+                <li>Рэгдолл-контроллер с расчленением</li>
+                <li>Уровни с физическими головоломками: движущиеся платформы, лазеры, пилы, молоты, скользкие поверхности</li>
+                <li>Таблица лидеров</li>
+                <li>Отдельный обучающий уровень</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="slide" style="--c:var(--yellow)" data-title="Mr Friend in Backrooms">
+            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Mr Friend in Backrooms</span><video src="media/mrfrield.mp4" muted loop playsinline preload="none" aria-label="Геймплей Mr Friend in Backrooms"></video></div>
+            <div class="info">
+              <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · ПК и мобильные</span></div>
+              <h3>Mr Friend in Backrooms</h3>
+              <p>Хоррор в Закулисье: прячься от монстра с телевизором вместо головы и переключай страшные мемы на экранах на мемы с котиками.</p>
+              <ul>
+                <li>ИИ врага с несколькими состояниями и системой зрения</li>
+                <li>Громкость шагов врага встроена в геймплей: по звуку игрок понимает, где монстр</li>
+              </ul>
             </div>
           </article>
 
@@ -362,7 +448,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
     <dl class="stack card">
       <div class="row" style="--c:var(--blue)"><dt>Движок и язык</dt><dd>Unity, C#, ООП, SOLID, паттерны проектирования, чистый код</dd></div>
       <div class="row" style="--c:var(--yellow)"><dt>Архитектура</dt><dd>Clean Architecture, ECS (Morpeh), Zenject, MVP</dd></div>
-      <div class="row" style="--c:var(--mint)"><dt>ИИ персонажей</dt><dd>FSM, Behaviour Trees, Utility AI, pathfinding (A*, NavMesh)</dd></div>
+      <div class="row" style="--c:var(--mint)"><dt>ИИ персонажей</dt><dd>FSM, Behaviour Trees, Utility AI, pathfinding</dd></div>
       <div class="row" style="--c:var(--red)"><dt>Библиотеки и инструменты</dt><dd>UniTask, R3, Addressables, JSON (JsonUtility, Newtonsoft), NUnit, DOTween, Git, Rider</dd></div>
       <div class="row" style="--c:var(--orange)"><dt>Оптимизация</dt><dd>Профилирование (Unity Profiler, Frame Debugger), Object Pooling, снижение GC-аллокаций, оптимизация под мобильные устройства</dd></div>
       <div class="row" style="--c:var(--blue-deep)"><dt>Мобильная разработка</dt><dd>Тач-управление и виртуальные джойстики, адаптивный UI, интеграция рекламы, IAP и аналитики</dd></div>
@@ -429,6 +515,11 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
       tabsTrack.style.transform = `translateX(${x}px)`;
     }
 
+    // время на карточку зависит от объёма текста: ~4 слова в секунду, от 8 до 20 секунд
+    slides.forEach(s => {
+      const words = s.querySelector('.info').textContent.trim().split(/\s+/).length;
+      s.dataset.ms = Math.min(20000, Math.max(DURATION, words * 250));
+    });
     const dur = () => +slides[index].dataset.ms || DURATION;
     const running = () => !userPaused && visible && !document.hidden;
 
@@ -454,7 +545,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
     const videos = slides.map(s => s.querySelector('video'));
     if (reduce) videos.forEach(v => v && (v.controls = true));
     videos.forEach((v, i) => v && v.addEventListener('loadedmetadata', () => {
-      slides[i].dataset.ms = Math.max(DURATION, Math.round(v.duration * 1000));
+      slides[i].dataset.ms = Math.max(+slides[i].dataset.ms || DURATION, Math.round(v.duration * 1000));
       paint();
     }));
     function syncVideos(restart) {
