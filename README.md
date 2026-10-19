@@ -1,1 +1,1 @@
-dnchrdev.github.io
+https://dnchrdev.github.io
