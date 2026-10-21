@@ -60,8 +60,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-off
 .screen h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,7vw,64px);line-height:1;margin:0;letter-spacing:.01em;text-shadow:0 0 14px rgba(75,227,162,.35)}
 .screen h1 .ph{color:var(--lcd-fg);border-bottom-color:var(--lcd-dim)}
 .screen .role{font-family:var(--mono);font-size:14px;margin:0;opacity:.85}
-.eq{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:6px}
-.eq i{flex:1;max-width:10px;background:var(--lcd-fg);opacity:.85;border-radius:1px;height:var(--h);transform-origin:bottom}
+.eq{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:6px;width:100%}
+.eq i{flex:1;min-width:0;background:var(--lcd-fg);opacity:.85;border-radius:1px;height:var(--h);transform-origin:bottom}
 .readout{display:flex;flex-wrap:wrap;gap:6px 28px;font-family:var(--mono);font-size:12px;opacity:.75}
 @media (prefers-reduced-motion:no-preference){
   .eq i{animation:eq 1.6s ease-in-out infinite alternate;animation-delay:var(--d)}
@@ -106,8 +106,6 @@ section{display:flex;flex-direction:column;gap:22px}
 .progress i{display:block;height:100%;width:100%;background:var(--lcd-fg);transform-origin:left;transform:scaleX(0)}
 .timer .count{white-space:nowrap;opacity:.8}
 .timer .state{white-space:nowrap}
-.play{width:52px;height:52px;flex:none;padding:0;background:var(--key-fg);color:#26272C}
-.play svg{width:20px;height:20px}
 
 .tabs{position:relative;overflow:hidden;padding:14px 0 4px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
@@ -123,6 +121,9 @@ section{display:flex;flex-direction:column;gap:22px}
   background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(75,227,162,.05) 3px 4px),var(--lcd)}
 .shot{overflow:hidden}
 .shot-title{font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,52px);line-height:1.05;text-align:center;padding:0 24px;color:var(--lcd-fg);text-shadow:0 0 18px rgba(75,227,162,.4);text-wrap:balance}
+.loader{width:44px;height:44px;border-radius:50%;border:4px solid var(--lcd-dim);border-top-color:var(--lcd-fg);box-shadow:0 0 14px rgba(75,227,162,.25)}
+@media (prefers-reduced-motion:no-preference){.loader{animation:spin .9s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}}
+.shot.ready .loader{display:none}
 .shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .shot::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:10px;border-radius:0 0 10px 10px;background:repeating-linear-gradient(-45deg,var(--c) 0 7px,transparent 7px 14px);opacity:.9}
 .info{display:flex;flex-direction:column;gap:12px;padding:0 6px 6px;max-width:72ch}
@@ -171,6 +172,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
 
 @media (max-width:760px){
   .dev-body{grid-template-columns:minmax(0,1fr)}
+  .eq i:nth-child(n+33){display:none}
   .side{grid-template-rows:none;grid-template-columns:72px minmax(0,1fr);align-items:stretch}
   .side .arrow{display:none}
   .slide{padding:12px;gap:14px}
@@ -200,7 +202,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           <h1>Денис Зарипов</h1>
           <p class="role">Gameplay · Architecture · Optimization · AI-assisted development</p>
           <div class="eq" aria-hidden="true">
-            <i style="--h:40%;--d:-.2s"></i><i style="--h:65%;--d:-.9s"></i><i style="--h:85%;--d:-.4s"></i><i style="--h:55%;--d:-1.2s"></i><i style="--h:95%;--d:-.6s"></i><i style="--h:70%;--d:-.1s"></i><i style="--h:45%;--d:-1.4s"></i><i style="--h:80%;--d:-.7s"></i><i style="--h:60%;--d:-.3s"></i><i style="--h:90%;--d:-1.1s"></i><i style="--h:50%;--d:-.5s"></i><i style="--h:75%;--d:-1.3s"></i><i style="--h:35%;--d:-.8s"></i><i style="--h:65%;--d:-.15s"></i><i style="--h:85%;--d:-1s"></i><i style="--h:55%;--d:-.45s"></i><i style="--h:30%;--d:-1.5s"></i><i style="--h:70%;--d:-.65s"></i><i style="--h:45%;--d:-.25s"></i><i style="--h:60%;--d:-.95s"></i><i style="--h:40%;--d:-1.25s"></i><i style="--h:25%;--d:-.55s"></i>
+            <i style="--h:68%;--d:-0.0s"></i><i style="--h:79%;--d:-0.37s"></i><i style="--h:72%;--d:-0.74s"></i><i style="--h:70%;--d:-1.11s"></i><i style="--h:83%;--d:-1.48s"></i><i style="--h:92%;--d:-0.25s"></i><i style="--h:77%;--d:-0.62s"></i><i style="--h:45%;--d:-0.99s"></i><i style="--h:28%;--d:-1.36s"></i><i style="--h:33%;--d:-0.13s"></i><i style="--h:41%;--d:-0.5s"></i><i style="--h:32%;--d:-0.87s"></i><i style="--h:20%;--d:-1.24s"></i><i style="--h:30%;--d:-0.01s"></i><i style="--h:61%;--d:-0.38s"></i><i style="--h:83%;--d:-0.75s"></i><i style="--h:82%;--d:-1.12s"></i><i style="--h:71%;--d:-1.49s"></i><i style="--h:74%;--d:-0.26s"></i><i style="--h:86%;--d:-0.63s"></i><i style="--h:82%;--d:-1.0s"></i><i style="--h:54%;--d:-1.37s"></i><i style="--h:27%;--d:-0.14s"></i><i style="--h:24%;--d:-0.51s"></i><i style="--h:36%;--d:-0.88s"></i><i style="--h:39%;--d:-1.25s"></i><i style="--h:29%;--d:-0.02s"></i><i style="--h:28%;--d:-0.39s"></i><i style="--h:52%;--d:-0.76s"></i><i style="--h:82%;--d:-1.13s"></i><i style="--h:90%;--d:-1.5s"></i><i style="--h:78%;--d:-0.27s"></i><i style="--h:69%;--d:-0.64s"></i><i style="--h:76%;--d:-1.01s"></i><i style="--h:81%;--d:-1.38s"></i><i style="--h:63%;--d:-0.15s"></i><i style="--h:31%;--d:-0.52s"></i><i style="--h:20%;--d:-0.89s"></i><i style="--h:27%;--d:-1.26s"></i><i style="--h:41%;--d:-0.03s"></i><i style="--h:38%;--d:-0.4s"></i><i style="--h:32%;--d:-0.77s"></i><i style="--h:44%;--d:-1.14s"></i><i style="--h:75%;--d:-1.51s"></i><i style="--h:94%;--d:-0.28s"></i><i style="--h:87%;--d:-0.65s"></i><i style="--h:70%;--d:-1.02s"></i><i style="--h:67%;--d:-1.39s"></i><i style="--h:75%;--d:-0.16s"></i><i style="--h:68%;--d:-0.53s"></i><i style="--h:40%;--d:-0.9s"></i><i style="--h:20%;--d:-1.27s"></i><i style="--h:20%;--d:-0.04s"></i><i style="--h:37%;--d:-0.41s"></i><i style="--h:46%;--d:-0.78s"></i><i style="--h:40%;--d:-1.15s"></i><i style="--h:42%;--d:-1.52s"></i><i style="--h:65%;--d:-0.29s"></i><i style="--h:92%;--d:-0.66s"></i><i style="--h:96%;--d:-1.03s"></i>
           </div>
         </div>
         <div class="side" aria-hidden="true">
@@ -239,7 +241,6 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           <span class="time">00:08</span>
           <span class="count"></span>
         </div>
-        <button class="key play" type="button" aria-label="Остановить автопрокрутку"></button>
         <button class="key nav next" type="button" aria-label="Следующий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <div class="tabs" role="tablist"><div class="tabs-track"></div></div>
@@ -247,7 +248,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
         <div class="track">
 
           <article class="slide" style="--c:var(--yellow)" data-title="Dragon Heartburn">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Dragon Heartburn</span><video src="media/dragon_heartburn.mp4" muted loop playsinline preload="none" aria-label="Геймплей Dragon Heartburn"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/dragon_heartburn.mp4" muted loop playsinline preload="none" aria-label="Геймплей Dragon Heartburn"></video></div>
             <div class="info">
               <div class="top"><span class="tape">Steam Demo</span><span class="kind">Unreal Engine · PC/Mobile</span></div>
               <h3>Dragon Heartburn</h3>
@@ -262,7 +263,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--red)" data-title="Strike Sandbox">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Strike Sandbox</span><video src="media/strike_sandbox.mp4" muted loop playsinline preload="none" aria-label="Геймплей Strike Sandbox"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/strike_sandbox.mp4" muted loop playsinline preload="none" aria-label="Геймплей Strike Sandbox"></video></div>
             <div class="info">
               <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · PC/Mobile</span></div>
               <h3>Strike Sandbox</h3>
@@ -280,7 +281,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--blue)" data-title="Squirrel and Woodcutter">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Squirrel and Woodcutter</span><video src="media/squirrel.mp4" muted loop playsinline preload="none" aria-label="Геймплей Squirrel and Woodcutter"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/squirrel.mp4" muted loop playsinline preload="none" aria-label="Геймплей Squirrel and Woodcutter"></video></div>
             <div class="info">
               <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · PC/Mobile · до 3 тыс. MAU</span></div>
               <h3>Squirrel and Woodcutter</h3>
@@ -296,7 +297,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--mint)" data-title="Crime Playground">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Crime Playground</span><video src="media/crime_playground.mp4" muted loop playsinline preload="none" aria-label="Геймплей Crime Playground"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/crime_playground.mp4" muted loop playsinline preload="none" aria-label="Геймплей Crime Playground"></video></div>
             <div class="info">
               <div class="top"><span class="tape">Прототип</span><span class="kind">Unity · PC</span></div>
               <h3>Crime Playground</h3>
@@ -311,7 +312,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--orange)" data-title="Kitten and the Doctor">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Kitten and the Doctor</span><video src="media/cat.mp4" muted loop playsinline preload="none" aria-label="Геймплей Kitten and the Doctor"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/cat.mp4" muted loop playsinline preload="none" aria-label="Геймплей Kitten and the Doctor"></video></div>
             <div class="info">
               <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · PC/Mobile · до 6 тыс. MAU</span></div>
               <h3>Kitten and the Doctor</h3>
@@ -325,7 +326,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--blue-deep)" data-title="Ragdoll Parkour Challenges">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Ragdoll Parkour Challenges</span><video src="media/ragdoll.mp4" muted loop playsinline preload="none" aria-label="Геймплей Ragdoll Parkour Challenges"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/ragdoll.mp4" muted loop playsinline preload="none" aria-label="Геймплей Ragdoll Parkour Challenges"></video></div>
             <div class="info">
               <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · PC/Mobile</span></div>
               <h3>Ragdoll Parkour Challenges</h3>
@@ -340,7 +341,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--yellow)" data-title="Mr Friend in Backrooms">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Mr Friend in Backrooms</span><video src="media/mrfrield.mp4" muted loop playsinline preload="none" aria-label="Геймплей Mr Friend in Backrooms"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/mrfrield.mp4" muted loop playsinline preload="none" aria-label="Геймплей Mr Friend in Backrooms"></video></div>
             <div class="info">
               <div class="top"><span class="tape">WebGL</span><span class="kind">Unity · PC/Mobile</span></div>
               <h3>Mr Friend in Backrooms</h3>
@@ -371,7 +372,6 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           <span class="time">00:08</span>
           <span class="count"></span>
         </div>
-        <button class="key play" type="button" aria-label="Остановить автопрокрутку"></button>
         <button class="key nav next" type="button" aria-label="Следующий"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <div class="tabs" role="tablist"><div class="tabs-track"></div></div>
@@ -379,7 +379,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
         <div class="track">
 
           <article class="slide" style="--c:var(--blue)" data-title="Cat Physics Sandbox">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Cat Physics Sandbox</span><video src="media/cat_physics_sandbox.mp4" muted loop playsinline preload="none" aria-label="Геймплей Cat Physics Sandbox"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/cat_physics_sandbox.mp4" muted loop playsinline preload="none" aria-label="Геймплей Cat Physics Sandbox"></video></div>
             <div class="info">
               <div class="top"><span class="tape">Clean Architecture</span><span class="kind">Unity 6 · WebGL · PC/Mobile</span></div>
               <h3>Cat Physics Sandbox</h3>
@@ -398,7 +398,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
           </article>
 
           <article class="slide" style="--c:var(--mint)" data-title="Squad Command">
-            <div class="shot lcd"><span class="shot-title" aria-hidden="true">Squad Command</span><video src="media/squad_command.mp4" muted loop playsinline preload="none" aria-label="Геймплей Squad Command"></video></div>
+            <div class="shot lcd"><span class="loader" role="status" aria-label="Загрузка видео"></span><video src="media/squad_command.mp4" muted loop playsinline preload="none" aria-label="Геймплей Squad Command"></video></div>
             <div class="info">
               <div class="top"><span class="tape">ECS + OOP</span><span class="kind">Unity · PC</span></div>
               <h3>Squad Command</h3>
@@ -484,8 +484,6 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
 (() => {
   const DURATION = 8000; // мс на один проект
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
-  const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
   const fmt = ms => '00:' + String(Math.ceil(ms / 1000)).padStart(2, '0');
 
   document.querySelectorAll('.deck').forEach(deck => {
@@ -497,11 +495,9 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
     const timeEl = deck.querySelector('.time');
     const countEl = deck.querySelector('.count');
     const stateEl = deck.querySelector('.state');
-    const playBtn = deck.querySelector('.play');
 
     let index = 0, elapsed = 0, last = 0;
-    let userPaused = reduce;  // при отключённой анимации автопрокрутка выключена, включается кнопкой
-    let visible = false;      // таймер идёт, только пока карточку видно на экране
+    const userPaused = reduce;  // при отключённой в системе анимации автопрокрутки нет, листать можно стрелками
 
     const tabs = slides.map((s, i) => {
       s.setAttribute('aria-roledescription', 'слайд');
@@ -527,7 +523,7 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
       const words = s.querySelector('.info').textContent.trim().split(/\s+/).length;
       s.dataset.ms = Math.min(20000, Math.max(DURATION, words * 250));
     });
-    const running = () => !userPaused && visible && !document.hidden;
+    const running = () => !userPaused && !document.hidden;
 
     // если у карточки есть видео, таймер идёт по видео: его длина — это время карточки,
     // его текущая позиция — это прогресс, конец ролика — переход к следующей карточке.
@@ -561,11 +557,17 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
     // видео играет только в открытой карточке, пока таймер идёт: пауза таймера ставит на паузу и видео
     videos.forEach((v, i) => {
       if (!v) return;
-      if (reduce) { v.controls = true; return; }
+      if (reduce) { v.controls = true; v.preload = 'metadata'; v.addEventListener('loadeddata', () => v.parentElement.classList.add('ready')); return; }
       v.loop = false;
       v.addEventListener('loadedmetadata', paint);
+      v.addEventListener('loadeddata', () => v.parentElement.classList.add('ready'));
       v.addEventListener('ended', () => { if (i === index) go(index + 1); });
-      v.addEventListener('error', () => { elapsed = 0; paint(); });
+      v.addEventListener('error', () => {
+        const shot = v.parentElement;
+        shot.classList.add('ready');
+        shot.insertAdjacentHTML('afterbegin', `<span class="shot-title" aria-hidden="true">${slides[i].dataset.title}</span>`);
+        elapsed = 0; paint();
+      });
     });
     function syncVideos(restart) {
       videos.forEach((v, i) => {
@@ -593,17 +595,9 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
       requestAnimationFrame(tick);
     }
 
-    function setUserPaused(p) {
-      userPaused = p;
-      playBtn.setAttribute('aria-label', p ? 'Запустить автопрокрутку' : 'Остановить автопрокрутку');
-      playBtn.innerHTML = p ? PLAY : PAUSE;
-      paint();
-      syncVideos(false);
-    }
 
     deck.querySelector('.prev').addEventListener('click', () => go(index - 1));
     deck.querySelector('.next').addEventListener('click', () => go(index + 1));
-    playBtn.addEventListener('click', () => setUserPaused(!userPaused));
 
     deck.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
@@ -620,15 +614,12 @@ footer .stripes{height:10px;flex:1;min-width:80px;border-radius:5px;opacity:.8}
       if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
     });
 
-    // таймер идёт, только пока сама панель с таймером видна на экране
-    new IntersectionObserver(([e]) => { visible = e.intersectionRatio >= 0.6; paint(); syncVideos(false); },
-      {threshold: [0, 0.6, 1]}).observe(deck.querySelector('.deck-bar'));
     document.addEventListener('visibilitychange', () => { paint(); syncVideos(false); });
     addEventListener('resize', centerTab);
     document.fonts && document.fonts.ready.then(centerTab);
 
-    setUserPaused(userPaused);
     render();
+    syncVideos(false);
     requestAnimationFrame(tick);
   });
 })();
